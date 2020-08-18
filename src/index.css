@@ -1,0 +1,73 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body, html {
+  height: 100vh;
+  background: #8e8e8e;
+}
+
+.ml10 {
+  margin-left: 10px;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+header input[type="file"] {
+  display: none;
+  padding: 10px;
+  color: #fff;
+  background: #1890ff;
+  border-radius: 6px;
+}
+
+header button {
+  padding: 8px 16px;
+  color: #fff;
+  border: 2px solid #1890ff;
+  background: #1890ff;
+  border-radius: 6px;
+  outline: none;
+  text-transform: uppercase;
+  font-size: 16px;
+  padding: 10px 20px;
+  font-weight: 300;
+  transition: all .2s;
+}
+
+header button:hover {
+  color: #1890ff;
+  cursor: pointer;
+  background: transparent;
+  box-shadow: 0px 3px 12px 0px #1890ff;
+}
+
+#canvas {
+  display: block;
+  background: #e8e8e8;
+}
+
+#canvas-wrapper {
+  width: 500px;
+  margin: 20px auto;
+  position: relative;
+  border: 2px solid snow;
+}
+
+#imgClip {
+  min-width: 200px;
+  min-height: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #000;
+  background: rgba(255, 255, 255, 0.2);
+}

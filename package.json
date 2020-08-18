@@ -1,0 +1,23 @@
+{
+  "name": "imageclip",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "http-server -p 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weichaozhan/ImageClip.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/weichaozhan/ImageClip/issues"
+  },
+  "homepage": "https://github.com/weichaozhan/ImageClip#readme",
+  "description": ""
+}
