@@ -8,18 +8,31 @@
   </head>
   <body>
     <header>
-      <!-- <input id="upload" type="file" ></input> -->
-      <!-- <button id="upload-btn" >上传</button> -->
-      <button class="ml10" >裁剪</button>
-      <button class="ml10" >保存</button>
+      <input id="upload" type="file" ></input>
+      <button id="upload-btn" >上传</button>
+      <button id="clip-btn" class="ml10" >裁剪</button>
+      <button id="save-btn" class="btn-disabled" class="ml10" disabled >保存</button>
     </header>
 
-    <div id="canvas-wrapper" >
-      <canvas id="canvas" width="500" height="500" >
-      </canvas>
-
-      <div id="imgClip" >
+    <div style="text-align: center;" >
+      <div id="canvas-wrapper" >
+        <canvas id="canvas" width="500" height="500" >
+        </canvas>
+  
+        <div id="imgClip" >
+          <div class="imgClip-resize imgClip-resize-left-top" data-x="-1" data-y="-1" ></div>
+          <div class="imgClip-resize imgClip-resize-top" data-x="0" data-y="-1" ></div>
+          <div class="imgClip-resize imgClip-resize-right-top" data-x="1" data-y="-1" ></div>
+          <div class="imgClip-resize imgClip-resize-left" data-x="-1" data-y="0" ></div>
+          <div class="imgClip-resize imgClip-resize-right" data-x="1" data-y="0" ></div>
+          <div class="imgClip-resize imgClip-resize-left-bottom" data-x="-1" data-y="1" ></div>
+          <div class="imgClip-resize imgClip-resize-bottom" data-x="0" data-y="1" ></div>
+          <div class="imgClip-resize imgClip-resize-right-bottom" data-x="1" data-y="1" ></div>
+        </div>
       </div>
+
+      <canvas id="preview" >
+      </canvas>
     </div>
 
     <script src="./index.js" ></script>

@@ -1,6 +1,11 @@
+:root {
+  --borderColor: #5e5e5e;
+}
+
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 body, html {
@@ -42,6 +47,14 @@ header button {
   transition: all .2s;
 }
 
+header button.btn-disabled {
+  color: #fff !important;
+  border-color: #8f8f8f !important;
+  background: #8f8f8f !important;
+  box-shadow: none !important;
+  cursor: not-allowed !important;
+}
+
 header button:hover {
   color: #1890ff;
   cursor: pointer;
@@ -55,19 +68,83 @@ header button:hover {
 }
 
 #canvas-wrapper {
-  width: 500px;
+  display: inline-block;
   margin: 20px auto;
   position: relative;
   border: 2px solid snow;
 }
 
 #imgClip {
-  min-width: 200px;
-  min-height: 200px;
+  width: 300px;
+  height: 300px;
   position: absolute;
-  top: 50%;
+  top: calc(50% - 150px);
+  left: calc(50% - 150px);
+  border: 1px solid var(--borderColor);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.imgClip-resize {
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  background: #fff;
+  border: 1px solid var(--borderColor);
+}
+.imgClip-resize-left-top {
+  left: -4px;
+  top: -4px;
+  cursor: se-resize;
+}
+.imgClip-resize-top {
+  top: -4px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid #000;
-  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(-50%);
+  cursor: n-resize;
+}
+.imgClip-resize-right-top {
+  top: -4px;
+  right: -4px;
+  cursor: sw-resize;
+}
+.imgClip-resize-left {
+  top: 50%;
+  left: -4px;
+  transform: translateY(-50%);
+  cursor: e-resize;
+}
+.imgClip-resize-right {
+  top: 50%;
+  right: -4px;
+  transform: translateY(-50%);
+  cursor: e-resize;
+}
+.imgClip-resize-left-bottom {
+  bottom: -4px;
+  left: -4px;
+  cursor: sw-resize;
+}
+.imgClip-resize-bottom {
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: n-resize;
+}
+.imgClip-resize-right-bottom {
+  bottom: -4px;
+  right: -4px;
+  cursor: se-resize;
+}
+
+.grabbing {
+  cursor: grabbing;
+}
+
+#preview {
+  margin: 20px 50px;
+  vertical-align: top;
+  background: cornsilk;
+  border: 2px dashed orange;
+  border-radius: 6px;
+  overflow: hidden;
 }
