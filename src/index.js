@@ -53,7 +53,10 @@
     imgSrc.width = cWidth;
 
     imgSrc.onload = () => {
-      imgSrc && (context.clearRect(cImgX, cImgY, originImgW, originImgH));
+      if (imgSrc) {
+        context.clearRect(cImgX, cImgY, originImgW, originImgH)
+        context.clearRect(0, 0, canvas.width, canvas.height);
+      }
 
       cImgX = 0;
       cImgY = 0;
@@ -81,6 +84,7 @@
     mouseCoordinate.y = e.screenY;
     
     context.clearRect(cImgX, cImgY, zoomSize.width, zoomSize.height);
+    context.clearRect(0, 0, canvas.width, canvas.height);
     
     cImgX += movementX;
     cImgY += movementY;
@@ -114,7 +118,8 @@
             const preHeight = zoomSize.height;
   
             context.clearRect(cImgX, cImgY, preWidth, preHeight);
-  
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
             zoomSize.height = sign * zoomSize.height;
             zoomSize.width = sign * zoomSize.width;
   

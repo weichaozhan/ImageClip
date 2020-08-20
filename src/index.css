@@ -1,5 +1,6 @@
 :root {
   --borderColor: #5e5e5e;
+  --rotateHeight: 16px;
 }
 
 * {
@@ -140,11 +141,30 @@ header button:hover {
   cursor: grabbing;
 }
 
-#preview {
+.preview-wrapper {
+  display: inline-block;
   margin: 20px 50px;
   vertical-align: top;
+  position: relative;
   background: cornsilk;
   border: 2px dashed orange;
   border-radius: 6px;
+  font-size: 0;
+}
+.rotate-wrapper {
+  width: 100%;
+  height: var(--rotateHeight);
+  position: absolute;
+  bottom: calc(var(--rotateHeight) * -2);
+  left: 0;
+  background: #dcf4ff;
+  border-radius: 2px;
   overflow: hidden;
 }
+.rotate {
+  height: var(--rotateHeight);
+  background-color: skyblue;
+}
+/* 
+#preview {
+} */
