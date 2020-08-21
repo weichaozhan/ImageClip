@@ -2,31 +2,89 @@
   const rotateWrapper = document.querySelector('.rotate-wrapper');
   const rotate = document.querySelector('.rotate');
   const perRad = Math.PI / 180;
-  const angleRange = 360 * perRad;
+  const angleRange = 360;
   const rotateWrapperRect = rotateWrapper.getBoundingClientRect();
-
+  
+  let radRotate = 0;
   let rmdown = false;
 
-  const eventRotate = new Event('eventRotate');
+  document.addEventListener('originChange', () => {
+    radRotate = 0;
+    pageClipVars.radRotate = 0;
+  });
+
   const computeRateWidth = (e) => {
-    console.log(e, e.target);
-    const { left, top } = rotateWrapperRect;
+    const { left, width, } = rotateWrapperRect;
     const currentX = e.screenX;
-    const currentY = e.screenY;
+    
+    let delta = currentX - left;
+    
+    if (delta < 0) {
+      delta = 0;
+    } else if (delta > width) {
+      delta = width;
+    }
+    // 计算旋转弧度
+    const rotateAngle = delta / width * angleRange;
+    radRotate = rotateAngle * perRad;
+    rotate.style.width = `${delta}px`;
+    document.querySelector('.rotate-tip').innerHTML = `${rotateAngle.toFixed(2)} deg`;
   }
-  rotateWrapper.addEventListener('eventRotate', computeRateWidth);
 
   rotateWrapper.addEventListener('mousedown', (e) => {
-    rotateWrapper.dispatchEvent(eventRotate);
-    // console.log(e, e.target);
-    rmdown = true;
-  });
-  rotateWrapper.addEventListener('mouseup', () => {
-    rmdown = false;
-  });
-  rotateWrapper.addEventListener('mousemove', (e) => {
-    if(rmdown) {
-
+    if (pageClipVars.imageUrl) {
+      computeRateWidth(e);
+      rmdown = true;
+      rotate.classList.add('show');
+      rotateCanvas();
     }
-  })
+  });
+
+  const rotateCanvas = () => {
+    const canvas = pageClipVars.canvas;
+    const context = pageClipVars.context;
+    const zoomSize = pageClipVars.zoomSize;
+    const imgSrc = pageClipVars.imgSrc;
+
+    if (context && zoomSize) {
+      context.restore();
+      context.save();
+
+      const { width, height, } = zoomSize;
+      const length = Math.sqrt(width**2 + height**2);
+      console.log('rotate', width, height, length);
+
+      context.clearRect(0, 0, length, length);
+      context.translate(length / 2, length / 2);
+      context.rotate(radRotate);
+      context.drawImage(imgSrc, -width / 2, -height / 2, width, height);
+
+      context.restore();
+
+      pageClipVars.radRotate = radRotate;
+    }
+  }
+  const rotateMove = () => {
+    let flag = null;
+    return (e) => {
+      e.preventDefault();
+      if (pageClipVars.imageUrl) {
+        rotateWrapper.classList.remove('disabled');
+      }
+      if (!flag && pageClipVars.imageUrl) {
+        flag = setTimeout(() => {
+          if (rmdown) {
+            computeRateWidth(e);
+            rotateCanvas();
+          }
+          flag = null;
+        }, 60);
+      }
+    }
+  };
+  document.addEventListener('mousemove', rotateMove());
+  document.addEventListener('mouseup', () => {
+    rmdown = false;
+    rotate.classList.remove('show');
+  });
 }());

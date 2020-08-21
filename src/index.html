@@ -8,11 +8,17 @@
   </head>
   <body>
     <header>
-      <input id="upload" type="file" accept=".jpg,.jpeg,.png,.gif" ></input>
+      <input id="upload" type="file" accept=".jpg,.jpeg,.png,.gif" />
       <button id="upload-btn" >上传</button>
       <button id="clip-btn" class="ml10" >裁剪</button>
       <button id="save-btn" class="btn-disabled" class="ml10" disabled >保存</button>
     </header>
+
+    <i class="rotate-wrapper disabled" >
+      <i class="rotate" >
+        <e class="rotate-tip" >0 deg</e>
+      </i>
+    </i>
 
     <div style="text-align: center;" >
       <div id="canvas-wrapper" >
@@ -34,13 +40,11 @@
       <div class="preview-wrapper" >
         <canvas id="preview" >
         </canvas>
-        <i class="rotate-wrapper" >
-          <i class="rotate" ></i>
-        </i>
       </div>
     </div>
 
     <script src="./index.js" ></script>
+    <script src="./canvas.js" ></script>
     <script src="./rotate.js" ></script>
   </body>
 </html>
