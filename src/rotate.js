@@ -47,12 +47,10 @@
     const imgSrc = pageClipVars.imgSrc;
 
     if (context && zoomSize) {
-      context.restore();
       context.save();
 
       const { width, height, } = zoomSize;
       const length = Math.sqrt(width**2 + height**2);
-      console.log('rotate', width, height, length);
 
       context.clearRect(0, 0, length, length);
       context.translate(length / 2, length / 2);

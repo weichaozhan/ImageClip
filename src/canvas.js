@@ -41,6 +41,8 @@
   document.addEventListener('originChange', () => {
     zoomSize.height = originImgH;
     zoomSize.width = originImgW;
+    canvas.style.top = 0;
+    canvas.style.left = 0;
   });
 
   /**
@@ -51,7 +53,22 @@
     return url;
   }
 
+  const getCustomComputedStyle = (dom, styles) => {
+    const style = window.getComputedStyle(dom);
+    const styleMap = {};
+
+    styles.forEach(name => {
+      styleMap[name] = parseFloat(style[name]);
+    });
+
+    return styleMap;
+  }
+
   inputUpload.addEventListener('change', (e) => {
+    if (!e.target.value) {
+      return;
+    }
+
     const file = e.target.files[0];
     imageUrl = getObjectUrl(file);
     
@@ -74,6 +91,13 @@
 
       document.dispatchEvent(originChange);
       context.drawImage(imgSrc, length / 2 - originImgW/2, length / 2 - originImgH / 2, originImgW, originImgH);
+      
+      const canvasStyle = getCustomComputedStyle(canvas, ['top', 'left']);
+      const { top, left } = canvasStyle;
+
+      canvas.style.top = `${top - (length / 2 - originImgH / 2)}px`;
+      canvas.style.left = `${left - (length / 2 - originImgW/2)}px`;
+
       resetPageVars();
     };
   });
@@ -125,6 +149,9 @@
           const rePaint = (sign) => {
             context.save();
 
+            const pewW = zoomSize.width;
+            const pewH = zoomSize.height;
+
             zoomSize.height = sign * zoomSize.height;
             zoomSize.width = sign * zoomSize.width;
 
@@ -142,12 +169,19 @@
             context.scale(sign, sign);
             context.drawImage(imgSrc, -(zoomSize.width / sign) / 2, -(zoomSize.height / sign) / 2, zoomSize.width / sign, zoomSize.height/ sign);
             context.restore();
+            context.setTransform(1, 0, 0, 1, 0, 0);
+
+            const canvasStyle = getCustomComputedStyle(canvas, ['top', 'left']);
+            const { top, left } = canvasStyle;
+
+            canvas.style.top = `${top - zoomSize.width + pewW}px`;
+            canvas.style.left = `${left - zoomSize.width + pewH}px`;
           }
 
           if (deltaY > 0) {
-            rePaint(0.5);
+            rePaint(0.8);
           } else {
-            rePaint(2);
+            rePaint(1.2);
           }
           flag = null;
         }, 100);
@@ -295,13 +329,16 @@
       const imgData = context.getImageData(left - cLeft, top - cTop, width, height);
 
       previewCtx.putImageData(imgData, 0, 0);
-                
+
+      saveBtn.classList.remove('btn-disabled');
+      saveBtn.removeAttribute('disabled');
     } else {
       alert('请上传图片进行截图！');
     }
   });
 
   saveBtn.addEventListener('click', () => {
+    console
     const a = document.createElement('a');
     a.href = preview.toDataURL();
     a.download = `cut_${Date.now()}`;
@@ -316,7 +353,6 @@
       if (!flag) {
         flag = setTimeout(() => {
           resetPageVars();
-          console.log(pageClipVars.zoomSize.width, pageClipVars.zoomSize.height);
           flag = null;
         }, 60);
       }
