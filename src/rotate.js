@@ -41,7 +41,6 @@
   });
 
   const rotateCanvas = () => {
-    const canvas = pageClipVars.canvas;
     const context = pageClipVars.context;
     const zoomSize = pageClipVars.zoomSize;
     const imgSrc = pageClipVars.imgSrc;
@@ -55,6 +54,8 @@
       context.clearRect(0, 0, length, length);
       context.translate(length / 2, length / 2);
       context.rotate(radRotate);
+      context.scale(pageClipVars.flipX, pageClipVars.flipY);
+      
       context.drawImage(imgSrc, -width / 2, -height / 2, width, height);
 
       context.restore();

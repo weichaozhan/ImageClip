@@ -9,16 +9,39 @@
   <body>
     <header>
       <input id="upload" type="file" accept=".jpg,.jpeg,.png,.gif" />
-      <button id="upload-btn" >上传</button>
-      <button id="clip-btn" class="ml10" >裁剪</button>
-      <button id="save-btn" class="btn-disabled" class="ml10" disabled >保存</button>
-    </header>
 
-    <i class="rotate-wrapper disabled" >
-      <i class="rotate" >
-        <e class="rotate-tip" >0 deg</e>
-      </i>
-    </i>
+      <button id="upload-btn" title="上传" >
+        <svg class="icon-symbol" aria-hidden="true">
+          <use xlink:href="#icon-48upload"></use>
+        </svg>
+      </button>
+
+      <button class="rtate-wrapper-btn" title="旋转" >
+        <svg class="icon-symbol" aria-hidden="true">
+          <use xlink:href="#icon-rotate"></use>
+        </svg>
+
+        <div class="rotate-tooltip" >
+          <i class="rotate-wrapper disabled" >
+            <i class="rotate" >
+              <e class="rotate-tip" >0 deg</e>
+            </i>
+          </i>
+        </div>
+      </button>
+
+      <button id="vertical-flip-btn" title="垂直翻转" >
+        <svg class="icon-symbol" aria-hidden="true">
+          <use xlink:href="#icon-flip-vertical"></use>
+        </svg>
+      </button>
+
+      <button id="horizontal-flip-btn" title="垂直翻转" >
+        <svg class="icon-symbol" aria-hidden="true">
+          <use xlink:href="#icon-flip-horizontal"></use>
+        </svg>
+      </button>
+    </header>
 
     <div style="text-align: center;" >
       <div id="canvas-wrapper" >
@@ -34,6 +57,20 @@
           <div class="imgClip-resize imgClip-resize-left-bottom" data-x="-1" data-y="1" ></div>
           <div class="imgClip-resize imgClip-resize-bottom" data-x="0" data-y="1" ></div>
           <div class="imgClip-resize imgClip-resize-right-bottom" data-x="1" data-y="1" ></div>
+
+          <div class="clip-area-action" >
+            <button id="clip-btn" title="裁剪" >
+              <svg class="icon-symbol icon-symbol--scissors" aria-hidden="true">
+                <use xlink:href="#icon-scissors"></use>
+              </svg>
+            </button>
+            
+            <button id="save-btn" class="btn-disabled" disabled title="保存" >
+              <svg class="icon-symbol" aria-hidden="true">
+                <use xlink:href="#icon-download"></use>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -43,6 +80,7 @@
       </div>
     </div>
 
+    <script src="./font/icon/iconfont.js"></script>
     <script src="./index.js" ></script>
     <script src="./canvas.js" ></script>
     <script src="./rotate.js" ></script>

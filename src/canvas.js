@@ -166,7 +166,7 @@
             const halfLenth = length / 2;
             context.translate(halfLenth, halfLenth);
             context.rotate(pageClipVars.radRotate);
-            context.scale(sign, sign);
+            context.scale(sign * pageClipVars.flipX, sign * pageClipVars.flipY);
             context.drawImage(imgSrc, -(zoomSize.width / sign) / 2, -(zoomSize.height / sign) / 2, zoomSize.width / sign, zoomSize.height/ sign);
             context.restore();
             context.setTransform(1, 0, 0, 1, 0, 0);
@@ -277,8 +277,6 @@
     }
   });
 
-  // 保存
-
   // mousemove
   const buildHandleMouseMove = () => {
     let flag = null;
@@ -306,11 +304,59 @@
     sizeMouseDown = false;
   });
 
+  /**
+   * 翻转
+   * @param {Event} e 
+   * @param {Number} direct 1 水平 2 垂直
+   */
+  const handleFlip = (e, direct) => {
+    e.preventDefault();
+    if (imageUrl) {
+      const deltaY = e.deltaY;
+      context.save();
+
+        const length = Math.sqrt(zoomSize.height**2 + zoomSize.width**2);
+
+        
+        canvas.width = length;
+        canvas.height = length;
+        
+        context.clearRect(0, 0, length, length);
+
+        const halfLenth = length / 2;
+        context.translate(halfLenth, halfLenth);
+        context.rotate(pageClipVars.radRotate);
+        
+        if (direct === 1) {
+          pageClipVars.flipX *= -1;
+        } else if (direct === 2) {
+          pageClipVars.flipY *= -1;
+        }
+        
+        context.scale(pageClipVars.flipX, pageClipVars.flipY);
+
+        context.drawImage(imgSrc, -zoomSize.width / 2, -zoomSize.height / 2, zoomSize.width, zoomSize.height);
+        context.restore();
+        context.setTransform(1, 0, 0, 1, 0, 0);
+    } else {
+      alert('请上传图片进行操作！');
+    }
+  }
+
+  document.querySelector('#vertical-flip-btn').addEventListener('click', (e) => {
+    handleFlip(e, 2);
+  });
+  document.querySelector('#horizontal-flip-btn').addEventListener('click', (e) => {
+    handleFlip(e, 1);
+  });
+  
+  
   const preview = document.querySelector('#preview');
   const previewCtx = preview.getContext('2d');
   
   const saveBtn = document.querySelector('#save-btn');
   
+  // 裁剪
   document.querySelector('#clip-btn').addEventListener('click', () => {
     if (imageUrl) {
       const styleClip = window.getComputedStyle(rectClip, null);
@@ -336,9 +382,8 @@
       alert('请上传图片进行截图！');
     }
   });
-
+  // 保存
   saveBtn.addEventListener('click', () => {
-    console
     const a = document.createElement('a');
     a.href = preview.toDataURL();
     a.download = `cut_${Date.now()}`;
