@@ -149,8 +149,8 @@
           const rePaint = (sign) => {
             context.save();
 
-            const pewW = zoomSize.width;
-            const pewH = zoomSize.height;
+            const preW = zoomSize.width;
+            const preH = zoomSize.height;
 
             zoomSize.height = sign * zoomSize.height;
             zoomSize.width = sign * zoomSize.width;
@@ -174,8 +174,8 @@
             const canvasStyle = getCustomComputedStyle(canvas, ['top', 'left']);
             const { top, left } = canvasStyle;
 
-            canvas.style.top = `${top - zoomSize.width + pewW}px`;
-            canvas.style.left = `${left - zoomSize.width + pewH}px`;
+            canvas.style.top = `${top - zoomSize.height + preH}px`;
+            canvas.style.left = `${left - zoomSize.width + preW}px`;
           }
 
           if (deltaY > 0) {

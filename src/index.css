@@ -81,7 +81,7 @@ header button:hover {
   margin: 20px auto;
   position: relative;
   border: 2px solid snow;
-  background: var(--bgcolorCanvas);
+  /* background: var(--bgcolorCanvas); */
   overflow: hidden;
 }
 
