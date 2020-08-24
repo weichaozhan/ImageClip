@@ -33,6 +33,14 @@
       context,
     });
   };
+  const resetChange = () => {
+    resetPageVars();
+    pageClipVars = Object.assign(pageClipVars, {
+      radRotate: 0,
+      flipX: 1,
+      flipY: 1
+    });
+  };
   
   document.querySelector('#upload-btn').addEventListener('click', () => {
     inputUpload.click();
@@ -98,7 +106,7 @@
       canvas.style.top = `${top - (length / 2 - originImgH / 2)}px`;
       canvas.style.left = `${left - (length / 2 - originImgW/2)}px`;
 
-      resetPageVars();
+      resetChange();
     };
   });
 

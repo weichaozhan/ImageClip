@@ -7,76 +7,85 @@
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <header>
-      <input id="upload" type="file" accept=".jpg,.jpeg,.png,.gif" />
-
-      <button id="upload-btn" title="上传" >
-        <svg class="icon-symbol" aria-hidden="true">
-          <use xlink:href="#icon-48upload"></use>
-        </svg>
-      </button>
-
-      <button class="rtate-wrapper-btn" title="旋转" >
-        <svg class="icon-symbol" aria-hidden="true">
-          <use xlink:href="#icon-rotate"></use>
-        </svg>
-
-        <div class="rotate-tooltip" >
-          <i class="rotate-wrapper disabled" >
-            <i class="rotate" >
-              <e class="rotate-tip" >0 deg</e>
-            </i>
-          </i>
-        </div>
-      </button>
-
-      <button id="vertical-flip-btn" title="垂直翻转" >
-        <svg class="icon-symbol" aria-hidden="true">
-          <use xlink:href="#icon-flip-vertical"></use>
-        </svg>
-      </button>
-
-      <button id="horizontal-flip-btn" title="垂直翻转" >
-        <svg class="icon-symbol" aria-hidden="true">
-          <use xlink:href="#icon-flip-horizontal"></use>
-        </svg>
-      </button>
-    </header>
-
-    <div style="text-align: center;" >
-      <div id="canvas-wrapper" >
-        <canvas id="canvas" width="500" height="500" >
-        </canvas>
+    <div class="container" >
+      
+      <div>
+        <div class="editor" >
+          <div id="canvas-wrapper" >
   
-        <div id="imgClip" >
-          <div class="imgClip-resize imgClip-resize-left-top" data-x="-1" data-y="-1" ></div>
-          <div class="imgClip-resize imgClip-resize-top" data-x="0" data-y="-1" ></div>
-          <div class="imgClip-resize imgClip-resize-right-top" data-x="1" data-y="-1" ></div>
-          <div class="imgClip-resize imgClip-resize-left" data-x="-1" data-y="0" ></div>
-          <div class="imgClip-resize imgClip-resize-right" data-x="1" data-y="0" ></div>
-          <div class="imgClip-resize imgClip-resize-left-bottom" data-x="-1" data-y="1" ></div>
-          <div class="imgClip-resize imgClip-resize-bottom" data-x="0" data-y="1" ></div>
-          <div class="imgClip-resize imgClip-resize-right-bottom" data-x="1" data-y="1" ></div>
-
-          <div class="clip-area-action" >
-            <button id="clip-btn" title="裁剪" >
-              <svg class="icon-symbol icon-symbol--scissors" aria-hidden="true">
-                <use xlink:href="#icon-scissors"></use>
-              </svg>
-            </button>
-            
-            <button id="save-btn" class="btn-disabled" disabled title="保存" >
+            <canvas id="canvas" width="500" height="500" >
+            </canvas>
+      
+            <div id="imgClip" >
+              <div class="imgClip-resize imgClip-resize-left-top" data-x="-1" data-y="-1" ></div>
+              <div class="imgClip-resize imgClip-resize-top" data-x="0" data-y="-1" ></div>
+              <div class="imgClip-resize imgClip-resize-right-top" data-x="1" data-y="-1" ></div>
+              <div class="imgClip-resize imgClip-resize-left" data-x="-1" data-y="0" ></div>
+              <div class="imgClip-resize imgClip-resize-right" data-x="1" data-y="0" ></div>
+              <div class="imgClip-resize imgClip-resize-left-bottom" data-x="-1" data-y="1" ></div>
+              <div class="imgClip-resize imgClip-resize-bottom" data-x="0" data-y="1" ></div>
+              <div class="imgClip-resize imgClip-resize-right-bottom" data-x="1" data-y="1" ></div>
+    
+              <div class="clip-area-action" >
+                <button id="clip-btn" title="裁剪" >
+                  <svg class="icon-symbol icon-symbol--scissors" aria-hidden="true">
+                    <use xlink:href="#icon-scissors"></use>
+                  </svg>
+                </button>
+                
+                <button id="save-btn" class="btn-disabled" disabled title="保存" >
+                  <svg class="icon-symbol" aria-hidden="true">
+                    <use xlink:href="#icon-download"></use>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="toolbar" >
+            <input id="upload" type="file" accept=".jpg,.jpeg,.png,.gif" />
+      
+            <button id="upload-btn" title="上传" >
               <svg class="icon-symbol" aria-hidden="true">
-                <use xlink:href="#icon-download"></use>
+                <use xlink:href="#icon-48upload"></use>
               </svg>
             </button>
+      
+            <button id="vertical-flip-btn" title="垂直翻转" >
+              <svg class="icon-symbol" aria-hidden="true">
+                <use xlink:href="#icon-flip-vertical"></use>
+              </svg>
+            </button>
+      
+            <button id="horizontal-flip-btn" title="垂直翻转" >
+              <svg class="icon-symbol" aria-hidden="true">
+                <use xlink:href="#icon-flip-horizontal"></use>
+              </svg>
+            </button>
+
+            <div class="rotate-item-wrapper" >
+              <span>
+                <svg class="icon-symbol" aria-hidden="true">
+                  <use xlink:href="#icon-rotate"></use>
+                </svg>
+                旋转：
+              </span>
+              
+              <i class="rotate-wrapper disabled" >
+                <i class="rotate" >
+                  <e class="rotate-tip" >0 deg</e>
+                </i>
+              </i>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="preview-wrapper" >
-        <canvas id="preview" >
-        </canvas>
+      <div class="preview-layout" >
+        <div class="preview-wrapper" >
+          <canvas id="preview" >
+          </canvas>
+        </div>
       </div>
     </div>
 
