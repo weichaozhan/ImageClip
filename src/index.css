@@ -41,6 +41,39 @@ body, html {
   background: #8e8e8e;
 }
 
+.footer {
+  width: 100%;
+  padding: 10px 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #24292e;
+  z-index: 999;
+}
+
+.github-icon {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+  background: 50% 130% / 80% no-repeat url('../src/github.png') #e8e8e8;
+  font-size: 0;
+  border-radius: 26px;
+}
+
+.github-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d0d0d0;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all .3s;
+}
+.github-link:hover {
+  color: #fff;
+}
+
 .ml10 {
   margin-left: 10px;
 }
@@ -65,9 +98,10 @@ body, html {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-items: center;
   width: 100%;
   padding: 10px 0;
+  margin-bottom: 50px;
+  align-items: center;
   background: #ffffff;
   border-radius: 6px;
 }
