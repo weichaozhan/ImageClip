@@ -10,7 +10,9 @@
   const cHeight = canvas.clientHeight;
   const cWidth = canvas.clientWidth;
   const context = canvas.getContext('2d');
-
+  
+  let animationDoing = null;
+  
   let imgSrc = new Image();
   // 图片原始长宽
   let originImgW;
@@ -236,36 +238,41 @@
     }
   }
   const resizeClip = (e) => {
-    const xFlag = rectClipXYFlag.x;
-    const yFlag = rectClipXYFlag.y;
-    let movementX = (e.screenX - mouseCoordinate.x) * xFlag;
-    let movementY = (e.screenY - mouseCoordinate.y) * yFlag;
+    if (!animationDoing && animationDoing !== 0) {
+      animationDoing = requestAnimationFrame(() => {
+        const xFlag = rectClipXYFlag.x;
+        const yFlag = rectClipXYFlag.y;
+        let movementX = (e.screenX - mouseCoordinate.x) * xFlag;
+        let movementY = (e.screenY - mouseCoordinate.y) * yFlag;
+        
+        mouseCoordinate.x = e.screenX;
+        mouseCoordinate.y = e.screenY;
     
-    mouseCoordinate.x = e.screenX;
-    mouseCoordinate.y = e.screenY;
-
-    const wrapperStyle = window.getComputedStyle(canvasWrapper, null);
-    let wrapperW = parseFloat(wrapperStyle.width),
-        wrapperH = parseFloat(wrapperStyle.height);
-    const styleClip = window.getComputedStyle(rectClip, null);
-    let top = parseFloat(styleClip.top),
-        left = parseFloat(styleClip.left),
-        width = parseFloat(styleClip.width) + movementX,
-        height = parseFloat(styleClip.height) + movementY;
-    
-    if (width >= 30 && width <= wrapperW) {
-      rectClip.style.width = `${width}px`;
-      if (xFlag < 0) {
-        rectClip.style.left = `${left - movementX}px`;
-      }
+        const wrapperStyle = window.getComputedStyle(canvasWrapper, null);
+        let wrapperW = parseFloat(wrapperStyle.width),
+            wrapperH = parseFloat(wrapperStyle.height);
+        const styleClip = window.getComputedStyle(rectClip, null);
+        let top = parseFloat(styleClip.top),
+            left = parseFloat(styleClip.left),
+            width = parseFloat(styleClip.width) + movementX,
+            height = parseFloat(styleClip.height) + movementY;
+        
+        if (width >= 30 && width <= wrapperW) {
+          rectClip.style.width = `${width}px`;
+          if (xFlag < 0) {
+            rectClip.style.left = `${left - movementX}px`;
+          }
+        }
+        if (height >= 30 && width <= wrapperH) {
+          rectClip.style.height = `${height}px`;
+          if (yFlag < 0) {
+            rectClip.style.top = `${top - movementY}px`;
+          }
+        }
+        animationDoing = null
+      });
     }
-    if (height >= 30 && width <= wrapperH) {
-      rectClip.style.height = `${height}px`;
-      if (yFlag < 0) {
-        rectClip.style.top = `${top - movementY}px`;
-      }
-    }
-  }
+  };
 
   rectClip.addEventListener('mousedown', (e) => {
     e.stopPropagation();
