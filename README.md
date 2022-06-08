@@ -1,5 +1,8 @@
 # 图片截取 demo
 
+## 预览
+https://weichaozhan.github.io/ImageClip/src/index.html
+
 ## 安装依赖
 ```bash
 npm i
